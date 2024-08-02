@@ -23,7 +23,6 @@ export default function RegisterSubmitBtn({ email, password, setCreds }: Props) 
     }
 
     const res = await registerUser({ email, password });
-    console.log("onRegister  res:", res?.status);
 
     if (res?.status === 200) {
       toast.success("Success - Check your email for confirmation");
@@ -41,7 +40,7 @@ export default function RegisterSubmitBtn({ email, password, setCreds }: Props) 
     <button
       type="submit"
       onClick={onRegister}
-      className="h-[3.5rem] w-[12rem] relative rounded-lg bg-black text-[1.3rem] font-bold text-white shadow-md"
+      className="relative flex h-[3.5rem] w-[12rem] items-center justify-center rounded-lg bg-black text-[1.3rem] font-bold text-white shadow-md"
     >
       {isLoading ? <LoadingSpinner color="gray" width="2rem" height="2rem" /> : "Register"}
     </button>

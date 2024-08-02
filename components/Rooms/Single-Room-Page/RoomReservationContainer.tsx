@@ -23,14 +23,9 @@ export default function RoomReservationContainer({ id, capacity }: Room) {
       return;
     }
 
-    if (
-      checkInDate === checkOutDate ||
-      checkInDate > checkOutDate ||
-      checkInDate < date ||
-      checkOutDate < date ||
-      checkInDate === date ||
-      checkOutDate === date
-    ) {
+    console.log(checkInDate, checkOutDate);
+
+    if (checkInDate === checkOutDate || checkInDate > checkOutDate) {
       toast.error("Invalid date range");
       setIsLoading(false);
       return;
@@ -64,7 +59,7 @@ export default function RoomReservationContainer({ id, capacity }: Room) {
             onClick={onReserve}
             className="relative flex h-[3.5rem] w-full items-center justify-center rounded-lg bg-black text-[1.3rem] font-bold uppercase text-white shadow-md"
           >
-            {isLoading ? <LoadingSpinner color="grey" /> : "Reserve"}
+            {isLoading ? <LoadingSpinner width="2rem" height="2rem" color="grey" /> : "Reserve"}
           </button>
         </section>
       </div>
