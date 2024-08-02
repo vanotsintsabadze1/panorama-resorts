@@ -11,10 +11,10 @@ interface Props {
 }
 
 export default function DateSetters({ checkIn, checkOut, setCheckInDate, setCheckOutDate }: Props) {
-  const checkInMonth = checkIn.getMonth();
+  const checkInMonth = checkIn.getMonth() + 1;
+  const checkOutMonth = checkOut.getMonth() + 1;
   const checkInDate = checkIn.getDate();
   const checkInYear = checkIn.getFullYear();
-  const checkOutMonth = checkOut.getMonth();
   const checkOutDate = checkOut.getDate();
   const checkOutYear = checkOut.getFullYear();
 

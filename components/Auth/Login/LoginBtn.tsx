@@ -34,7 +34,7 @@ export default function LoginBtn({ setCreds, email, password }: Props) {
       onClick={onLogin}
       className="relative flex h-[3.5rem] w-[12rem] items-center justify-center rounded-lg bg-black text-[1.3rem] font-bold text-white shadow-md"
     >
-      {loading ? <LoadingSpinner color="gray" /> : "Login"}
+      {loading ? <LoadingSpinner width="2rem" height="2rem" color="gray" /> : "Login"}
     </button>
   );
 }

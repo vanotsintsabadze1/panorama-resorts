@@ -23,13 +23,7 @@ export async function cancelReservation(identifier: string) {
       },
     });
 
-    if (res.ok) {
-      return true;
-    }
-
-    if (!res.ok) {
-      return false;
-    }
+    return res.ok ? true : false;
   } catch (error) {
     console.error(error);
     return false;

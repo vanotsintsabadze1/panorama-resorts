@@ -1,6 +1,5 @@
 import React from "react";
 import DateCell from "./DateCell";
-import { useState } from "react";
 
 interface Props {
   month: number;
@@ -21,7 +20,7 @@ export default function DatesFrame({ month, year, setModal, setCurrentDate }: Pr
   const prevMonthDays = new Date(prevYear, prevMonth + 1, 0).getDate() - emptyCellAmount;
 
   function onSelectDate(date: number) {
-    setCurrentDate(new Date(year, month + 1, date));
+    setCurrentDate(new Date(year, month, date));
     setModal(false);
   }
 
