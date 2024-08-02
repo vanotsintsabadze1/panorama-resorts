@@ -1,0 +1,37 @@
+"use server";
+import { cookies } from "next/headers";
+
+// This function gets revoked after the INITIAL PAYPAL CANCELLATION.
+// It's not related to the post-successful payment cancellation.
+// See cancelAuthorizedReservation.ts for that.
+
+export async function cancelReservation(identifier: string) {
+  const url = process.env.API_ADDR;
+  const token = cookies().get("user")?.value;
+
+  if (!identifier || !token) {
+    return false;
+  }
+
+  try {
+    const res = await fetch(`${url}/v1/Reservation/CancelReservation/${identifier}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      return true;
+    }
+
+    if (!res.ok) {
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
