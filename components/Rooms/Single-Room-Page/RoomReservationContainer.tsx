@@ -23,8 +23,6 @@ export default function RoomReservationContainer({ id, capacity }: Room) {
       return;
     }
 
-    console.log(checkInDate, checkOutDate);
-
     if (checkInDate === checkOutDate || checkInDate > checkOutDate) {
       toast.error("Invalid date range");
       setIsLoading(false);

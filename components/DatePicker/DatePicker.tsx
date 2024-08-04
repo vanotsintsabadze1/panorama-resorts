@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import SelectedDateFrame from "./SelectedDateFrame";
 import DaysFrame from "./DaysFrame";

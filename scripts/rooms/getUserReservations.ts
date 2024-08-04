@@ -22,7 +22,12 @@ export async function getUserReservations() {
       },
     });
 
-    return await res.json();
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      return null;
+    }
   } catch (error) {
     console.error(error);
     return null;
