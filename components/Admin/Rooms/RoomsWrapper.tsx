@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import RoomsActions from "./RoomActions";
 
 interface Props {
   rooms: Room[] | [];
@@ -50,22 +51,28 @@ export default function RoomsWrapper({ rooms }: Props) {
           </button>
         </div>
       </div>
-      <div className="flex h-[40rem] min-w-[70rem] flex-col overflow-auto rounded-[1rem] border border-gray-300 p-[2rem] text-[1.3rem] shadow-md">
+      <div className="flex h-[40rem] min-w-[70rem] flex-col overflow-auto rounded-[1rem] border border-gray-300 bg-white p-[2rem] text-[1.3rem] shadow-md">
         <div className="grid w-full grid-cols-5 font-semibold uppercase">
-          <div className="col-span-1 px-[1rem]">ID</div>
-          <div className="col-span-2 px-[1rem]">Type</div>
-          <div className="col-span-1 px-[1rem]">Capacity</div>
-          <div className="col-span-1 px-[1rem]">Price Per Night</div>
+          <div className="col-span-1 flex items-center px-[1rem]">ID</div>
+          <div className="col-span-1 flex items-center justify-center px-[1rem]">Type</div>
+          <div className="col-span-1 flex items-center justify-center px-[1rem]">Capacity</div>
+          <div className="col-span-1 flex items-center justify-center px-[1rem]">Price Per Night</div>
+          <div className="col-span-1 flex items-center justify-center px-[1rem]">Actions</div>
         </div>
         {searchableRooms.map((room) => (
           <div
             key={room.id}
             className="mt-[2rem] grid w-full grid-cols-5 gap-[1rem] rounded-[1rem] border border-gray-300 py-[1rem] shadow-sm"
           >
-            <div className="col-span-1 w-[10rem] truncate px-[1rem]">{room.id}</div>
-            <div className="col-span-2 px-[1rem]">{room.type}</div>
-            <div className="col-span-1 px-[1rem]">{room.capacity}</div>
-            <div className="col-span-1 px-[1rem]">{room.pricePerNight}</div>
+            <div className="col-span-1 flex w-[10rem] items-center truncate px-[1rem]">{room.id}</div>
+            <div className="col-span-1 flex items-center justify-center px-[1rem]">
+              {room.type === 0 ? "Single Room" : room.type === 1 ? "Double Room" : "Suite Room"}
+            </div>
+            <div className="col-span-1 flex items-center justify-center px-[1rem]">{room.capacity}</div>
+            <div className="col-span-1 flex items-center justify-center px-[1rem]">{room.pricePerNight}</div>
+            <div className="col-span-1 flex items-center justify-center gap-[1rem] px-[1rem]">
+              <RoomsActions id={room.id} />
+            </div>
           </div>
         ))}
       </div>

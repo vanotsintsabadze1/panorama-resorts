@@ -15,6 +15,7 @@ export default function LoginFields() {
         className="h-[4rem] w-full border-b-2 border-b-black/50 px-[1.2rem] py-[1rem] text-[1.3rem] outline-none duration-200"
         type="email"
         name="email"
+        autoComplete="on"
         value={creds.email}
         onChange={(e) => setCreds({ ...creds, email: e.target.value })}
         placeholder="Email"
@@ -23,6 +24,7 @@ export default function LoginFields() {
         className="h-[4rem] w-full border-b-2 border-b-black/50 px-[1.2rem] py-[1rem] text-[1.3rem] outline-none duration-200"
         type="password"
         name="password"
+        autoComplete="on"
         value={creds.password}
         onChange={(e) => setCreds({ ...creds, password: e.target.value })}
         placeholder="Password"

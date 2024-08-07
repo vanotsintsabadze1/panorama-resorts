@@ -1,12 +1,12 @@
 "use server";
 import { format } from "date-fns";
-import { cookies } from "next/headers";
+import { getUserToken } from "../auth/getUserToken";
 
 export async function reserveRoom(roomId: string, checkInDate: Date, checkOutDate: Date, residentAmount: number) {
   const url = process.env.API_ADDR;
   const formattedCheckInDate = format(checkInDate, "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
   const formattedCheckOutDate = format(checkOutDate, "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
-  const token = cookies().get("user");
+  const token = await getUserToken();
 
   if (!roomId || !checkInDate || !checkOutDate || !residentAmount) {
     return {

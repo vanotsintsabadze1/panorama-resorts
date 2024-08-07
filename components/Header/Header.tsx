@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import AuthButton from "./AuthButton";
 import BurgerMenu from "./BurgerMenu";
 import Logo from "./Logo";
@@ -6,10 +5,11 @@ import Navigation from "./Navigation";
 import { getUserAuthStatus } from "@/scripts/auth/getUserAuthStatus";
 import UserReservationsMarker from "./UserReservationsMarker";
 import { getUserReservations } from "@/scripts/rooms/getUserReservations";
+import { getUserToken } from "@/scripts/auth/getUserToken";
 
 export default async function Header() {
-  const token = cookies().get("user");
-  const isUserAuth = token?.value ? await getUserAuthStatus(token.value) : false;
+  const token = await getUserToken();
+  const isUserAuth = token ? await getUserAuthStatus(token) : false;
   const userReservations = await getUserReservations();
 
   return (

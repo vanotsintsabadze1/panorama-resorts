@@ -1,10 +1,10 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { getUserToken } from "../auth/getUserToken";
 
 export async function getUserReservations() {
   const url = process.env.API_ADDR;
-  const token = cookies().get("user")?.value;
+  const token = await getUserToken();
 
   if (!token) return null;
 
