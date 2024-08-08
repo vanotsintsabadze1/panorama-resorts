@@ -1,3 +1,5 @@
+import EditRoomCard from "@/components/Admin/Rooms/EditRoomCard";
+import { getUserToken } from "@/scripts/auth/getUserToken";
 import { redirect } from "next/navigation";
 
 interface Props {
@@ -8,8 +10,15 @@ interface Props {
 
 async function getRoombyId(id: string) {
   const url = process.env.API_ADDR;
+  const token = await getUserToken();
+
   try {
-    const res = await fetch(`${url}/rooms/${id}`);
+    const res = await fetch(`${url}/v1/Room/${id}/1`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const data: Room = await res.json();
 
@@ -27,5 +36,9 @@ export default async function page({ params }: Props) {
     return redirect("/admin/rooms");
   }
 
-  return <div>page</div>;
+  return (
+    <section className="flex w-full items-center justify-center px-[2rem] py-[5rem]">
+      <EditRoomCard {...room} />
+    </section>
+  );
 }

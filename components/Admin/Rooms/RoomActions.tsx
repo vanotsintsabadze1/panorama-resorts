@@ -1,11 +1,11 @@
+import LoadingSpinner from "@/components/misc/LoadingSpinner";
 import ConfirmationModal from "@/components/misc/ConfirmationModal";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Trash2Icon, Edit } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import LoadingSpinner from "@/components/misc/LoadingSpinner";
 import { deleteRoom } from "@/scripts/admin/deleteRoom";
-import toast from "react-hot-toast";
 
 interface Props {
   id: string;
@@ -16,7 +16,7 @@ export default function RoomsActions({ id }: Props) {
   const [shouldDeleteConfirmationModalOpen, setShouldDeleteConfirmationModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  function onEdit() {
+  function onRoomEdit() {
     router.push(`/admin/rooms/editRoom/${id}`);
   }
 
@@ -31,13 +31,13 @@ export default function RoomsActions({ id }: Props) {
 
     if (res?.status === 200) {
       toast.success("Room deleted successfully.");
+      router.refresh();
     } else if (res?.status === 500) {
       toast.error("Error on the server. Contact the support.");
     } else {
       toast.error("Unauthorized action.");
     }
 
-    router.refresh();
     setIsLoading(false);
   }
 
@@ -49,7 +49,7 @@ export default function RoomsActions({ id }: Props) {
         )}
       </AnimatePresence>
 
-      <button>
+      <button onClick={onRoomEdit}>
         <Edit size={17} color="green" className="duration-150 ease-in-out hover:scale-105" />
       </button>
       {isLoading ? (
