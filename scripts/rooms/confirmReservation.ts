@@ -1,9 +1,10 @@
 "use server";
-import { cookies } from "next/headers";
+
+import { getUserToken } from "../auth/getUserToken";
 
 export async function confirmReservation(rid: string) {
   const url = process.env.API_ADDR;
-  const token = cookies().get("user");
+  const token = await getUserToken();
 
   if (!rid) {
     return {
@@ -18,7 +19,7 @@ export async function confirmReservation(rid: string) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${token?.value}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 

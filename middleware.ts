@@ -13,7 +13,8 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  if (!isUserAuth && pathname.startsWith("/rooms")) {
+  // prettier-ignore
+  if ((!isUserAuth && (pathname.startsWith("/rooms") || pathname.startsWith("/admin")))) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 

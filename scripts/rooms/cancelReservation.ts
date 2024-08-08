@@ -1,5 +1,6 @@
 "use server";
-import { cookies } from "next/headers";
+
+import { getUserToken } from "../auth/getUserToken";
 
 // This function gets revoked after the INITIAL PAYPAL CANCELLATION.
 // It's not related to the post-successful payment cancellation.
@@ -7,7 +8,7 @@ import { cookies } from "next/headers";
 
 export async function cancelReservation(identifier: string) {
   const url = process.env.API_ADDR;
-  const token = cookies().get("user")?.value;
+  const token = await getUserToken();
 
   if (!identifier || !token) {
     return false;

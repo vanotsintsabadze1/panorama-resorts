@@ -11,6 +11,7 @@ export default async function RoomsWrapper() {
         {rooms.map((room, index) => (
           <RoomCard {...room} key={index} />
         ))}
+        {rooms.length === 0 && <p className="uppercase text-gray-300 text-[1.4rem] font-light tracking-wider">No rooms found.</p>}
       </div>
     </section>
   );
