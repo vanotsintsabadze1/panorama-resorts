@@ -3,6 +3,11 @@ interface RegisterField {
   password: string;
 }
 
+interface RoomImagePayload {
+  id: string;
+  url: string;
+}
+
 interface Room {
   id: string;
   type: number;
@@ -10,7 +15,7 @@ interface Room {
   capacity: number;
   pricePerNight: number;
   pricePerNightCurrency: number;
-  images: string[];
+  images: RoomImagePayload[];
 }
 
 interface ReservationResponse {

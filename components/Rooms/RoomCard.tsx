@@ -1,18 +1,67 @@
+"use client";
+
 import { PersonStanding, CircleDollarSign } from "lucide-react";
 import Image from "next/image";
 import RoomSeeMoreBtn from "./RoomSeeMoreBtn";
+import { useEffect, useState } from "react";
+import { getUserToken } from "@/scripts/auth/getUserToken";
+import LoadingSpinner from "../misc/LoadingSpinner";
 
-export default function RoomCard({ images, type, id, description, capacity, pricePerNight }: Room) {
+interface Props extends Room {
+  url: string;
+  token: string;
+}
+
+export default function RoomCard({
+  images: roomImageURLs,
+  type,
+  id,
+  description,
+  capacity,
+  pricePerNight,
+  url,
+  token,
+}: Props) {
+  const [image, setImages] = useState<string>("");
+
+  // Since we only need one image, we're going to be fetching the first image of the room only.
+  // This cuts the request amount and computation price.
+  // The function has to be invoked on client side as octet-stream returns a blob and we need to use URL.createObjectURL(), which is only available on client.
+
+  async function getSingleImage() {
+    const res = await fetch(`${url}/v1/Image/${roomImageURLs[0].url}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "image/.jpg",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const blob = await res.blob();
+    const imageUrl = URL.createObjectURL(blob);
+    setImages(imageUrl);
+  }
+
+  // Function gets invoked on the first load.
+  useEffect(() => {
+    getSingleImage();
+  }, []);
+
   return (
     <div className="flex min-h-[40rem] w-[38rem] flex-col items-center gap-[1rem] rounded-[1rem] border border-gray-200 bg-white p-[2rem] shadow-lg xs:max-w-[35rem]">
-      <div className="relative h-[25rem] w-[35rem] xs:h-[20rem] xs:w-[30rem]">
-        <Image src="https://placehold.co/600x400/png" fill alt="image" className="rounded-[1rem]" />
+      <div className="relative flex h-[25rem] w-[35rem] items-center justify-center xs:h-[20rem] xs:w-[30rem]">
+        {image !== "" ? (
+          <Image src={image} alt="some image" fill className="rounded-[1rem] shadow-md" />
+        ) : (
+          <LoadingSpinner width="4rem" height="4rem" color="black" />
+        )}
       </div>
-      <div className="flex flex-col gap-[.5rem]">
-        <h2 className="text-[1.8rem] font-bold">{type}</h2>
+      <div className="flex w-full flex-col gap-[.5rem]">
+        <h2 className="text-[1.8rem] font-bold">
+          {type === 0 ? "Single Room" : type === 1 ? "Double Room" : "Suite Room"}
+        </h2>
         <p className="line-clamp-3 text-[1.3rem] font-medium">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, animi nobis amet fugit similique dolor
-          voluptas quibusdam consequuntur reprehenderit ea.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur mollitia deserunt laudantium velit facilis
+          ducimus molestias nam sapiente architecto distinctio.
         </p>
         <p className="mt-[.5rem] text-[1.3rem] font-bold">Details</p>
         <div className="my-[.5rem] flex w-full items-center gap-[2rem]">

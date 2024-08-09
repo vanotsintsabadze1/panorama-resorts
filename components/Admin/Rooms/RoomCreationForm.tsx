@@ -1,13 +1,13 @@
 "use client";
+import RoomCreationFormFields from "./RoomCreationFormFields";
+import LoadingSpinner from "@/components/misc/LoadingSpinner";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Upload, X } from "lucide-react";
 import { schema } from "../../../schemas/roomCreationSchema";
 import { toast } from "react-hot-toast";
 import { createRoom } from "@/scripts/admin/createRoom";
 import { useRouter } from "next/navigation";
-import RoomCreationFormFields from "./RoomCreationFormFields";
-import LoadingSpinner from "@/components/misc/LoadingSpinner";
-import Image from "next/image";
 
 export default function RoomCreationForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -16,9 +16,6 @@ export default function RoomCreationForm() {
   const [images, setImages] = useState<string[]>([]);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log("🚀 ~ RoomCreationForm ~ images:", images);
-  console.log("🚀 ~ RoomCreationForm ~ imageFiles:", imageFiles);
 
   async function onRoomCreation(e: React.MouseEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,9 +27,6 @@ export default function RoomCreationForm() {
       return;
     }
     const formData = new FormData(formRef.current);
-
-    const images = formData.getAll("ImageFiles") as File[];
-    console.log("🚀 ~ onRoomCreation ~ images:", images);
 
     const data = {
       description: formData.get("Description") as string,
@@ -62,6 +56,10 @@ export default function RoomCreationForm() {
   }
 
   function onImageUpload() {
+    if (!imagesInputRef.current?.files || imagesInputRef.current.files.length === 0) {
+      return;
+    }
+
     if (!formRef.current) {
       return;
     }
@@ -106,7 +104,7 @@ export default function RoomCreationForm() {
         Upload Room Images
         <input
           type="file"
-          accept="image/*"
+          accept="image/png, image/jpeg"
           name="ImageFiles"
           onChange={onImageUpload}
           multiple
