@@ -7,7 +7,6 @@ import RoomsFilterPriceRange from "./RoomsFilterPriceRange";
 import toast from "react-hot-toast";
 
 export default function RoomsFilter() {
-  const types = ["All", "Single", "Double", "Suite", "King"];
   const [type, setType] = useState("All");
   const [residentAmount, setResidentAmount] = useState(0);
   const [priceFrom, setPriceFrom] = useState(0);
@@ -33,7 +32,10 @@ export default function RoomsFilter() {
         <RoomsFilterPriceRange from={priceFrom} to={priceTo} setFrom={setPriceFrom} setTo={setPriceTo} />
       </div>
       <div className="flex w-full items-center justify-center md:w-[40rem] xs:w-full">
-        <button onClick={onSubmit}  className="h-[3.5rem] w-full rounded-lg bg-black text-[1.3rem] font-bold uppercase tracking-wider text-white">
+        <button
+          onClick={onSubmit}
+          className="h-[3.5rem] w-full rounded-lg bg-black text-[1.3rem] font-bold uppercase tracking-wider text-white"
+        >
           Submit
         </button>
       </div>

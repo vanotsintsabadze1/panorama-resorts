@@ -1,7 +1,9 @@
+import { getUserToken } from "@/scripts/auth/getUserToken";
 import { TvMinimal, Wifi, Bed, Ruler } from "lucide-react";
 import Image from "next/image";
+import ImageSlider from "./ImageSlider";
 
-export default function SingleRoomCard({
+export default async function SingleRoomCard({
   id,
   type,
   description,
@@ -10,6 +12,9 @@ export default function SingleRoomCard({
   pricePerNightCurrency,
   images,
 }: Room) {
+  const url = process.env.API_ADDR;
+  const token = await getUserToken();
+
   return (
     <div className="flex flex-col items-center rounded-[1rem] border border-gray-200 p-[2rem] shadow-md sm:w-[38rem] md:w-[50rem] lg:w-auto lg:flex-row lg:gap-x-[3rem] lg:px-[4rem] xs:w-[30rem]">
       <section className="flex flex-col gap-[1rem]">
@@ -37,10 +42,8 @@ export default function SingleRoomCard({
           </div>
         </div>
       </section>
-      <section className="mt-[1rem] flex w-full items-center justify-center py-[1.5rem] lg:w-auto">
-        <div className="relative h-[22rem] w-[35rem] md:h-[30rem] md:w-[45rem] xs:h-[18rem] xs:w-[30rem]">
-          <Image src="https://placehold.co/600x400/png" fill alt="image" className="rounded-[1rem]" />
-        </div>
+      <section className="mt-[1rem] flex w-full flex-col items-center justify-center gap-[1rem] py-[1.5rem] lg:w-auto">
+        <ImageSlider token={token as string} url={url as string} roomImages={images} />
       </section>
     </div>
   );

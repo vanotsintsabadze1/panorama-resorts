@@ -75,6 +75,11 @@ export default function RoomsWrapper({ rooms }: Props) {
             </div>
           </div>
         ))}
+        {searchableRooms.length === 0 && (
+          <div className="flex h-full w-full items-center justify-center">
+            <p className="text-[1.4rem] font-light uppercase tracking-wider text-gray-300">No Rooms Available</p>
+          </div>
+        )}
       </div>
     </section>
   );

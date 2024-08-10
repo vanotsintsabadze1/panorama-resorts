@@ -11,6 +11,7 @@
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.47",
     "date-fns": "^3.6.0",
+    "embla-carousel-react": "^8.1.8",
     "framer-motion": "^11.3.2",
     "lenis": "^1.1.8",
     "lucide-react": "^0.408.0",
