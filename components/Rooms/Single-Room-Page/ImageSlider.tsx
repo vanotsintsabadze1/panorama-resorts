@@ -63,8 +63,12 @@ export default function ImageSlider({ url, token, roomImages }: Props) {
 
       <div className="flex w-full items-center justify-center gap-[1rem]">
         {images.map((image, idx) => (
-          <button onClick={() => onImageClick(idx)} className="relative h-[6rem] w-[7rem] rounded-lg shadow-md">
-            <Image src={image} fill key={image} alt={`room-mini-image-${idx}`} />
+          <button
+            key={image}
+            onClick={() => onImageClick(idx)}
+            className="relative h-[6rem] w-[7rem] rounded-lg shadow-md"
+          >
+            <Image src={image} fill alt={`room-mini-image-${idx}`} />
           </button>
         ))}
       </div>

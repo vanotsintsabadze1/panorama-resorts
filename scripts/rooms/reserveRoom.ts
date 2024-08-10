@@ -21,7 +21,7 @@ export async function reserveRoom(roomId: string, checkInDate: Date, checkOutDat
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${token?.value}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         roomId: roomId,
