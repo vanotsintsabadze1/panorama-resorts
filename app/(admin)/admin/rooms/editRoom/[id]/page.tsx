@@ -31,6 +31,8 @@ async function getRoombyId(id: string) {
 
 export default async function page({ params }: Props) {
   const room = await getRoombyId(params.id);
+  const token = await getUserToken();
+  const url = process.env.API_ADDR;
 
   if (!room) {
     return redirect("/admin/rooms");
@@ -38,7 +40,7 @@ export default async function page({ params }: Props) {
 
   return (
     <section className="flex w-full items-center justify-center px-[2rem] py-[5rem]">
-      <EditRoomCard {...room} />
+      <EditRoomCard url={url as string} token={token as string} {...room} />
     </section>
   );
 }

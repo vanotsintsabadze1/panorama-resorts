@@ -98,9 +98,9 @@ export default function RoomCreationForm() {
       <RoomCreationFormFields />
       <label
         htmlFor="roomCreationFileUpload"
-        className="relative flex h-[15rem] w-full flex-col items-center justify-center gap-[1rem] rounded-[2rem] bg-gray-300 py-[1rem] text-[1.2rem] font-semibold text-gray-400 shadow-sm"
+        className="relative flex h-[10rem] w-[20rem] flex-col items-center justify-center gap-[1rem] rounded-[2rem] bg-gray-300/40 py-[1rem] text-[1.2rem] font-semibold text-gray-400 shadow-sm"
       >
-        <Upload size={48} className="text-gray-400 opacity-80" />
+        <Upload size={35} className="text-gray-400 opacity-80" />
         Upload Room Images
         <input
           type="file"
