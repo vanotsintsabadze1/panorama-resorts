@@ -5,7 +5,8 @@ export default function Showcase() {
     <section className="mt-[2rem] flex w-full flex-wrap items-center justify-center gap-x-[10rem] gap-y-[3rem] py-[2rem]">
       <div className="flex w-[50rem] flex-col items-center justify-center p-[1rem]">
         <div className="relative h-[25rem] w-[38rem] md:h-[30rem] md:w-[45rem] xs:h-[20rem] xs:w-[30rem]">
-          <Image src="https://placehold.co/600x400/png" fill alt="image" className="rounded-[2rem]" />
+          <Image src="/images/backgrounds/hero-showcase-1.webp" fill alt="image" className="rounded-[2rem]" />
+          <canvas className="absolute z-[20] h-full w-full rounded-[2rem] bg-orange-600/20" />
         </div>
         <div className="mt-[1rem] flex flex-col items-center justify-center gap-[1.5rem]">
           <p className="max-w-[40rem] px-[1rem] text-center text-[1.3rem] font-medium">
@@ -19,7 +20,8 @@ export default function Showcase() {
       </div>
       <div className="flex w-[50rem] flex-col items-center justify-center p-[1rem]">
         <div className="relative h-[25rem] w-[38rem] md:h-[30rem] md:w-[45rem] xs:h-[20rem] xs:w-[30rem]">
-          <Image src="https://placehold.co/600x400/png" fill alt="image" className="rounded-[2rem]" />
+          <Image src="/images/backgrounds/hero-showcase-2.webp" fill alt="image" className="rounded-[2rem]" />
+          <canvas className="absolute z-[20] h-full w-full rounded-[2rem] bg-orange-600/20" />
         </div>
         <div className="mt-[1rem] flex flex-col items-center justify-center gap-[1.5rem]">
           <p className="max-w-[40rem] px-[1rem] text-center text-[1.3rem] font-medium">

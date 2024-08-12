@@ -7,10 +7,16 @@ import { useEffect, useState } from "react";
 import ConfirmedReservationDetails from "../Single-Room-Page/ConfirmedReservationDetails";
 import LoadingSpinner from "@/components/misc/LoadingSpinner";
 
-export default function ReservationConfirmation() {
+interface Props {
+  url: string;
+  token: string;
+}
+
+export default function ReservationConfirmation({ url, token: authToken }: Props) {
   const [token, setToken] = useState<string | null>(null);
   const [data, setData] = useState<ConfirmedReservationResponse | undefined>(undefined);
   const [fetched, setFetched] = useState(false);
+  const [images, setImages] = useState<string[]>([]);
 
   async function confirmReservationOnLoad() {
     if (!token) {
@@ -43,6 +49,22 @@ export default function ReservationConfirmation() {
       window.localStorage.removeItem("rid");
     }
   }, [token]);
+
+  // Has to be handled on backend first since images property that's being sent is NULL.
+  // To be fixed ltr.
+  // useEffect(() => {
+  //   if (data) {
+  //     data.room.images.forEach(async (image) => {
+  //       const res = await fetch(`${url}/v1/Image/${image}`, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "image/.jpg",
+  //           Authorization: `Bearer ${authToken}`,
+  //         },
+  //       });
+  //     });
+  //   }
+  // }, [data]);
 
   return fetched ? (
     <section className="flex w-full items-center justify-center px-[1rem] py-[4rem]">

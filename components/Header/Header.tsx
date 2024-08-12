@@ -9,7 +9,9 @@ import { getUserToken } from "@/scripts/auth/getUserToken";
 
 export default async function Header() {
   const token = await getUserToken();
-  const isUserAuth = token ? await getUserAuthStatus(token) : false;
+  const authRes = await getUserAuthStatus(token as string);
+  const isUserAuth = authRes.isAuth;
+  const isUserAdmin = authRes.data?.roles.includes("Admin") ?? false;
   const userReservations = await getUserReservations();
 
   return (
@@ -21,7 +23,7 @@ export default async function Header() {
           {/* only visible on desktop */}
           <Navigation className="flex gap-[3rem] text-[1.2rem] font-medium uppercase text-white" />
           {userReservations && <UserReservationsMarker reservationCount={userReservations.length} />}
-          <AuthButton isUserAuth={isUserAuth} />
+          <AuthButton isUserAuth={isUserAuth} isUserAdmin={isUserAdmin} />
         </div>
       </div>
     </header>

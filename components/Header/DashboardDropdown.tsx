@@ -7,7 +7,11 @@ const divAnimation = {
   visible: { opacity: 1, y: 1 },
 };
 
-export default function DashboardDropdown() {
+interface Props {
+  isUserAdmin: boolean;
+}
+
+export default function DashboardDropdown({ isUserAdmin }: Props) {
   const router = useRouter();
 
   function onLogout() {
@@ -23,12 +27,14 @@ export default function DashboardDropdown() {
       className="absolute left-0 flex w-full flex-col items-center rounded-b-lg bg-white text-[1.3rem] font-medium"
     >
       <button className="h-[4rem] w-full duration-150 ease-in-out hover:bg-gray-300/60">Settings</button>
-      <button
-        className="h-[4rem] w-full duration-150 ease-in-out hover:bg-gray-300/60"
-        onClickCapture={() => router.push("/admin")}
-      >
-        Admin
-      </button>
+      {isUserAdmin && (
+        <button
+          className="h-[4rem] w-full duration-150 ease-in-out hover:bg-gray-300/60"
+          onClickCapture={() => router.push("/admin/rooms")}
+        >
+          Admin
+        </button>
+      )}
       <button className="h-[4rem] w-full duration-150 ease-in-out hover:bg-gray-300/60" onClick={onLogout}>
         Log Out
       </button>

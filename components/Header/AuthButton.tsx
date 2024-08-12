@@ -6,9 +6,10 @@ import { AnimatePresence } from "framer-motion";
 
 interface Props {
   isUserAuth: boolean;
+  isUserAdmin: boolean;
 }
 
-export default function AuthButton({ isUserAuth }: Props) {
+export default function AuthButton({ isUserAuth, isUserAdmin }: Props) {
   const router = useRouter();
   const [isDropdownOpen, setDropdown] = useState(false);
 
@@ -28,7 +29,9 @@ export default function AuthButton({ isUserAuth }: Props) {
       >
         {isUserAuth ? "Dashboard" : "Sign In"}
       </button>
-      <AnimatePresence>{isDropdownOpen && isUserAuth && <DashboardDropdown />}</AnimatePresence>
+      <AnimatePresence>
+        {isDropdownOpen && isUserAuth && <DashboardDropdown isUserAdmin={isUserAdmin} />}
+      </AnimatePresence>
     </div>
   );
 }
