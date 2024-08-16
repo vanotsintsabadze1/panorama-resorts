@@ -127,16 +127,12 @@ export default function EditRoomCard({ id, type, capacity, pricePerNight, descri
 
       const newFiles = new DataTransfer();
 
-      console.log("vcvli", imagesAsFiles);
       imagesAsFiles.forEach((imageFile) => {
         newFiles.items.add(imageFile);
       });
 
       imageInputRef.current.files = newFiles.files;
     }
-    console.log(imagesAsUrls);
-    console.log(imagesAsFiles);
-    console.log(imageInputRef.current?.files);
   }, [imagesAsFiles]);
 
   return (

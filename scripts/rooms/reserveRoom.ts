@@ -32,6 +32,8 @@ export async function reserveRoom(roomId: string, checkInDate: Date, checkOutDat
       }),
     });
 
+    console.log("🚀 ~ reserveRoom ~ res:", res);
+
     if (res.ok) {
       const data = await res.json();
       return { status: 200, data };

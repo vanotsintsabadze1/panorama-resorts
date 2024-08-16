@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 
 import RoomReservationContainer from "@/components/Rooms/Single-Room-Page/RoomReservationContainer";
 import SingleRoomCard from "@/components/Rooms/Single-Room-Page/SingleRoomCard";
+import ReviewsWrapper from "@/components/Rooms/Single-Room-Page/ReviewsWrapper";
 
 interface Props {
   params: {
@@ -50,6 +51,7 @@ export default async function page({ params: { id } }: Props) {
     <section className="flex w-full flex-col items-center justify-center py-[4rem]">
       <SingleRoomCard {...data} />;
       <RoomReservationContainer {...data} />
+      <ReviewsWrapper />
     </section>
   );
 }

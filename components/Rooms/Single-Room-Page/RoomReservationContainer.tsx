@@ -37,6 +37,12 @@ export default function RoomReservationContainer({ id, capacity }: Room) {
 
       window.localStorage.setItem("rid", reservationIdentifier);
       window.location.href = approveLink;
+    } else if (res?.status === 500) {
+      toast.error("Internal Server Error");
+    } else if (res?.status === 403) {
+      toast.error("Unauthorized");
+    } else {
+      toast.error("Room already reserved.");
     }
 
     setIsLoading(false);

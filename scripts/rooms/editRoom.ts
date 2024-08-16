@@ -19,8 +19,6 @@ export default async function editRoom(formData: FormData) {
       body: formData,
     });
 
-    console.log(res);
-
     return res.ok ? { status: 200 } : { status: res.status };
   } catch (error) {
     console.error(error);

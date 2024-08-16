@@ -13,8 +13,6 @@ interface Props {
 export default function RoomsWrapper({ rooms, url, token }: Props) {
   const [existingRooms, setExistingRooms] = useState(rooms);
 
-  console.log(existingRooms);
-
   return (
     <section className="flex w-full flex-col items-center gap-[3rem] pb-[4rem] pt-[2rem]">
       <RoomsFilter setRooms={setExistingRooms} />
