@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Hotel, ArrowBigDownIcon } from "lucide-react";
+import IntroductionInteractionButtons from "./IntroductionInteractionButtons";
 
 export default function Introduction() {
   return (
@@ -16,14 +17,7 @@ export default function Introduction() {
             Experience Unmatched Luxury and Comfort - Your Perfect Getaway Awaits at Panorama Resorts
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center gap-[3rem]">
-          <button className="mt-[1rem] flex h-[4rem] w-[16rem] items-center justify-center gap-[.8rem] rounded-lg bg-orange-800 px-[1rem] text-[1.4rem] font-bold text-white shadow-2xl shadow-orange-400">
-            Book Now <Hotel color="white" size={20} />
-          </button>
-          <button className="mt-[1rem] flex h-[4rem] w-[4rem] animate-bounce items-center justify-center rounded-[50%] bg-white">
-            <ArrowBigDownIcon size={25} />
-          </button>
-        </div>
+        <IntroductionInteractionButtons />
       </div>
     </section>
   );

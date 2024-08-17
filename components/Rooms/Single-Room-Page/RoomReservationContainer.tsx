@@ -43,6 +43,7 @@ export default function RoomReservationContainer({ id, capacity }: Room) {
       toast.error("Unauthorized");
     } else {
       toast.error("Room already reserved.");
+      console.log(res?.status);
     }
 
     setIsLoading(false);

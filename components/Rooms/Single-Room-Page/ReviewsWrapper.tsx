@@ -1,13 +1,17 @@
 import { Star } from "lucide-react";
-import ReviewTextArea from "./ReviewTextArea";
+import ReviewCreation from "./ReviewCreation";
 
-export default function ReviewsWrapper() {
+interface Props {
+  canReview: boolean;
+}
+
+export default function ReviewsWrapper({ canReview }: Props) {
   return (
     <section className="mb-[1rem] mt-[5rem] flex w-full flex-col items-center">
       <div className="flex w-full flex-col px-[2rem] md:w-[60rem] lg:w-[100rem]">
         <h1 className="text-[3rem] font-medium text-slate-800">Reviews</h1>
         <canvas className="my-[2rem] h-[.1rem] w-[90%] bg-black/10" />
-        <ReviewTextArea />
+        <ReviewCreation canReview={canReview} />
         <div className="mt-[4rem] flex w-full flex-col gap-[4rem]">
           {[...Array(5).fill(0)].map((_, i) => (
             <div key={i} className="flex w-full flex-col gap-[.5rem]">
