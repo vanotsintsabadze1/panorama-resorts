@@ -45,3 +45,10 @@ interface ConfirmedReservationResponse {
     images: string[];
   };
 }
+
+interface RoomReview {
+  id: string;
+  starCount: number;
+  text: string;
+  createdAtUtc: Date;
+}

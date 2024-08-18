@@ -57,11 +57,35 @@ async function isUserPermittedToReview(url: string, token: string, rid: string) 
   }
 }
 
+async function getRoomReviews(url: string, token: string, rid: string, page = 1) {
+  try {
+    const res = await fetch(`${url}/v1/Review/${rid}/${page}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 export default async function page({ params: { id } }: Props) {
   const url = process.env.API_ADDR;
   const token = await getUserToken();
   const data: Room | null = await getRoom(url as string, token as string, id);
   const canReview = await isUserPermittedToReview(url as string, token as string, id);
+  const reviews = await getRoomReviews(url as string, token as string, id);
 
   if (!data) {
     return (
@@ -77,7 +101,7 @@ export default async function page({ params: { id } }: Props) {
     <section className="flex w-full flex-col items-center justify-center py-[4rem]">
       <SingleRoomCard {...data} />;
       <RoomReservationContainer {...data} />
-      <ReviewsWrapper canReview={canReview} />
+      <ReviewsWrapper roomId={id} reviews={reviews} canReview={canReview} />
     </section>
   );
 }
