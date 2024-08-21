@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 
 const divAnimations = {
   hidden: { opacity: 0 },
@@ -12,9 +13,12 @@ interface Props {
 }
 
 export default function ConfirmationModal({ callback, setModal }: Props) {
+  const router = useRouter();
+
   function onConfirmation() {
     callback();
     setModal(false);
+    router.refresh();
   }
 
   function onCancel() {

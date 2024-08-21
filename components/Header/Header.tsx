@@ -16,7 +16,7 @@ export default async function Header() {
 
   return (
     <header className="z-[40] flex w-full items-center justify-center bg-primary px-[2rem]">
-      <div className="flex w-full items-center justify-center py-[2.5rem] md:py-[2rem] lg:justify-between xl:max-w-[150rem]">
+      <div className="relative flex w-full items-center justify-center py-[2.5rem] md:py-[2rem] lg:justify-between xl:max-w-[150rem]">
         <Logo />
         <BurgerMenu /> {/* only visible on mobile & tablet */}
         <div className="hidden items-center justify-center gap-[2rem] px-[2rem] lg:flex">

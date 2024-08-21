@@ -6,8 +6,6 @@ export async function deleteRoom(id: string) {
   const url = process.env.API_ADDR;
   const token = await getUserToken();
 
-  console.log(id);
-
   if (!token || !id) {
     return null;
   }

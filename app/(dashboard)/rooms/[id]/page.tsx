@@ -66,10 +66,11 @@ async function getRoomReviews(url: string, token: string, rid: string, page = 1)
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
+      cache: "no-cache",
     });
 
     if (res.ok) {
-      const data = await res.json();
+      const data: RoomReview[] = await res.json();
       return data;
     }
 

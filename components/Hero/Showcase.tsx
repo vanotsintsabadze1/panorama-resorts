@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Showcase() {
   return (
@@ -13,8 +14,10 @@ export default function Showcase() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi vero est assumenda dicta enim,
             similique eius corporis dolores expedita, libero atque illo natus. Deleniti minima ducimus quis officia ad.
           </p>
-          <button className="h-[3.5rem] w-[10rem] rounded-lg bg-orange-600 text-[1.2rem] font-bold text-white shadow-md">
-            View Rooms
+          <button className="h-[3.5rem] w-[12rem] rounded-lg bg-orange-600 text-[1.2rem] font-bold text-white shadow-md">
+            <Link href="/rooms" className="h-full w-full">
+              View Rooms
+            </Link>
           </button>
         </div>
       </div>
@@ -29,7 +32,9 @@ export default function Showcase() {
             similique eius corporis dolores expedita, libero atque illo natus. Deleniti minima ducimus quis officia ad.
           </p>
           <button className="h-[3.5rem] w-[12rem] rounded-lg bg-orange-600 text-[1.2rem] font-bold text-white shadow-md">
-            View Facilities
+            <Link href="/facilities" className="h-full w-full">
+              View Facilities
+            </Link>
           </button>
         </div>
       </div>

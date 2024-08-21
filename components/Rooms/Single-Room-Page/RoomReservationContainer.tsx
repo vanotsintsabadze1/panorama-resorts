@@ -6,6 +6,7 @@ import ResidentAmount from "./ResidentAmount";
 import { reserveRoom } from "@/scripts/rooms/reserveRoom";
 import toast from "react-hot-toast";
 import LoadingSpinner from "@/components/misc/LoadingSpinner";
+import { format } from "date-fns";
 
 export default function RoomReservationContainer({ id, capacity }: Room) {
   const date = new Date();
@@ -43,7 +44,6 @@ export default function RoomReservationContainer({ id, capacity }: Room) {
       toast.error("Unauthorized");
     } else {
       toast.error("Room already reserved.");
-      console.log(res?.status);
     }
 
     setIsLoading(false);

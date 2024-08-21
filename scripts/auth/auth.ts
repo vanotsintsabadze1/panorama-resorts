@@ -23,7 +23,9 @@ export async function loginUser({ email, password }: RegisterField) {
 
     if (res.ok) {
       const data = await res.json();
-      cookies().set("user", data);
+      cookies().set("user", data, {
+        expires: new Date(Date.now() + 9 * 24 * 60 * 60 * 1000),
+      });
       return { status: 200, message: "Logged in." };
     }
 

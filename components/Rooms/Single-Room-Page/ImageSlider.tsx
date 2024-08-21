@@ -43,7 +43,7 @@ export default function ImageSlider({ url, token, roomImages }: Props) {
 
   return (
     <>
-      <div className="relative h-[22rem] w-[35rem] md:h-[30rem] md:w-[45rem] xs:h-[18rem] xs:w-[30rem]">
+      <div className="relative h-[22rem] w-[35rem] md:h-[30rem] md:w-[45rem] xs:h-[18rem] xs:w-[28rem]">
         {images.length > 0 ? (
           <div className="embla">
             <div className="embla__viewport rounded-[1rem]" ref={emblaRef}>
@@ -61,7 +61,7 @@ export default function ImageSlider({ url, token, roomImages }: Props) {
         )}
       </div>
 
-      <div className="flex w-full items-center justify-center gap-[2rem]">
+      <div className="flex w-full flex-wrap items-center justify-center gap-[2rem]">
         {images.map((image, idx) => (
           <button
             key={image}
