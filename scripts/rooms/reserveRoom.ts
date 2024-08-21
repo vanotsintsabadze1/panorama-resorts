@@ -1,11 +1,11 @@
 "use server";
-import { format } from "date-fns";
+import { startOfDay, format } from "date-fns";
 import { getUserToken } from "../auth/getUserToken";
 
 export async function reserveRoom(roomId: string, checkInDate: Date, checkOutDate: Date, residentAmount: number) {
   const url = process.env.API_ADDR;
-  const formattedCheckInDate = format(checkInDate, "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
-  const formattedCheckOutDate = format(checkOutDate, "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
+  const formattedCheckInDate = format(startOfDay(checkInDate), "yyyy-MM-dd'T'HH:mm:ss");
+  const formattedCheckOutDate = format(startOfDay(checkOutDate), "yyyy-MM-dd'T'HH:mm:ss");
   const token = await getUserToken();
 
   if (!roomId || !checkInDate || !checkOutDate || !residentAmount) {

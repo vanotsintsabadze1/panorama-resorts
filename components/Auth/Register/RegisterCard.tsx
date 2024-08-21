@@ -1,7 +1,10 @@
 import Image from "next/image";
 import RegisterFields from "./RegisterFields";
+import GoogleLoginBtn from "../Login/GoogleLoginBtn";
 
 export default function RegisterCard() {
+  const url = process.env.API_ADDR;
+
   return (
     <div className="flex w-[40rem] flex-col items-center rounded-lg bg-white py-[2rem] shadow-md xs:w-[30rem]">
       <div className="relative h-[1.2rem] w-[14rem]">
@@ -12,9 +15,8 @@ export default function RegisterCard() {
         <p className="max-w-[30rem] text-center text-[1.1rem] font-medium">Using social connection</p>
       </div>
       <canvas className="my-[2rem] h-[.1rem] w-[70%] bg-gray-300" />
-      <div className="flex w-full items-center justify-center gap-[2rem]">
-        <Image width={30} height={30} src="/images/icons/sm-icons/google_colored.webp" alt="google-logo" />
-        <Image width={30} height={30} src="/images/icons/sm-icons/facebook_colored.webp" alt="facebook-logo" />
+      <div className="flex w-full items-center justify-center gap-[.5rem]">
+        <GoogleLoginBtn url={url as string} />
       </div>
       <div className="mt-[2rem] flex w-full justify-center">
         <p className="text-[1.2rem] font-medium">OR</p>

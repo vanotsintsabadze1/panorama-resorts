@@ -22,10 +22,7 @@ export default function RootLayout({
         <LenisWrapper>
           {children}
 
-          <Toaster
-            position="top-center"
-            containerStyle={{ fontSize: "1.3rem" }}
-          />
+          <Toaster position="top-center" containerStyle={{ fontSize: "1.3rem", textAlign: "center" }} />
         </LenisWrapper>
       </body>
     </html>

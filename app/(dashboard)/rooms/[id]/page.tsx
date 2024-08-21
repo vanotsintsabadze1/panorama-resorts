@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 
 import RoomReservationContainer from "@/components/Rooms/Single-Room-Page/RoomReservationContainer";
 import SingleRoomCard from "@/components/Rooms/Single-Room-Page/SingleRoomCard";
+import ReviewsWrapper from "@/components/Rooms/Single-Room-Page/ReviewsWrapper";
+import { getUserToken } from "@/scripts/auth/getUserToken";
 
 interface Props {
   params: {
@@ -9,11 +11,9 @@ interface Props {
   };
 }
 
-async function getRoom(id: string) {
-  const url = process.env.API_ADDR;
-  const token = cookies().get("token")?.value;
+async function getRoom(url: string, token: string, rid: string) {
   try {
-    const res = await fetch(`${url}/v1/Room/${id}/1`, {
+    const res = await fetch(`${url}/v1/Room/${rid}/1`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -33,8 +33,60 @@ async function getRoom(id: string) {
   }
 }
 
+async function isUserPermittedToReview(url: string, token: string, rid: string) {
+  try {
+    const res = await fetch(`${url}/v1/Review/CanUserReview/${rid}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      const data: boolean = await res.json();
+      return data;
+    } else {
+      console.error(res.statusText);
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+async function getRoomReviews(url: string, token: string, rid: string, page = 1) {
+  try {
+    const res = await fetch(`${url}/v1/Review/${rid}/${page}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-cache",
+    });
+
+    if (res.ok) {
+      const data: RoomReview[] = await res.json();
+      return data;
+    }
+
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 export default async function page({ params: { id } }: Props) {
-  const data: Room | null = await getRoom(id);
+  const url = process.env.API_ADDR;
+  const token = await getUserToken();
+  const data: Room | null = await getRoom(url as string, token as string, id);
+  const canReview = await isUserPermittedToReview(url as string, token as string, id);
+  const reviews = await getRoomReviews(url as string, token as string, id);
 
   if (!data) {
     return (
@@ -50,6 +102,7 @@ export default async function page({ params: { id } }: Props) {
     <section className="flex w-full flex-col items-center justify-center py-[4rem]">
       <SingleRoomCard {...data} />;
       <RoomReservationContainer {...data} />
+      <ReviewsWrapper roomId={id} reviews={reviews} canReview={canReview} />
     </section>
   );
 }

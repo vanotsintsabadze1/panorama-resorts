@@ -20,7 +20,7 @@ export default function BurgerMenu() {
 
   return (
     <>
-      <div className="absolute right-[1rem] top-1/2 z-50 -translate-y-1/2 lg:hidden">
+      <div className="absolute right-0 top-1/2 z-50 -translate-y-1/2 lg:hidden">
         <button onClick={openSidebar}>
           <Menu color="white" size={32} />
         </button>

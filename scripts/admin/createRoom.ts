@@ -26,7 +26,7 @@ export async function createRoom(formData: FormData) {
       return { status: response.status, message: "Failed to create room" };
     }
   } catch (error) {
-    console.error();
+    console.error(error);
     return { status: 500, message: "Internal server error" };
   }
 }

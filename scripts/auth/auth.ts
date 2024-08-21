@@ -23,7 +23,9 @@ export async function loginUser({ email, password }: RegisterField) {
 
     if (res.ok) {
       const data = await res.json();
-      cookies().set("user", data);
+      cookies().set("user", data, {
+        expires: new Date(Date.now() + 9 * 24 * 60 * 60 * 1000),
+      });
       return { status: 200, message: "Logged in." };
     }
 
@@ -73,5 +75,28 @@ export async function registerUser({ email, password }: RegisterField) {
   } catch (error) {
     console.error(error);
     return { error: "An error occurred", status: 500 };
+  }
+}
+
+export async function googleLogin(code: string) {
+  const url = process.env.API_ADDR;
+
+  try {
+    const res = await fetch(`${url}/v1/User/google-redirect?code=${code}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    const data = await res.json();
+
+    cookies().set("user", data, {
+      expires: new Date(Date.now() + 9 * 24 * 60 * 60 * 1000),
+    });
+  } catch (error) {
+    console.error(error);
+    return { status: 500, token: null };
   }
 }

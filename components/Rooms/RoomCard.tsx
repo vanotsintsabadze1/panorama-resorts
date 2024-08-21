@@ -67,11 +67,11 @@ export default function RoomCard({
         <div className="my-[.5rem] flex w-full items-center gap-[2rem]">
           <div className="flex items-center justify-center gap-[.5rem]">
             <PersonStanding size={30} />
-            <p className="text-[1.4rem] font-medium">4</p>
+            <p className="text-[1.4rem] font-medium">{capacity}</p>
           </div>
           <div className="flex items-center justify-center gap-[.5rem]">
             <CircleDollarSign size={24} />
-            <p className="text-[1.4rem] font-medium">$300</p>
+            <p className="text-[1.4rem] font-medium">${pricePerNight}</p>
           </div>
         </div>
         <div className="flex w-full items-center justify-center">

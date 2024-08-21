@@ -8,8 +8,8 @@ export default function Navigation() {
 
   const links = [
     {
-      title: "Dashboard",
-      href: "/admin",
+      title: "Home",
+      href: "/",
       icon: <Home size={23} />,
     },
     {

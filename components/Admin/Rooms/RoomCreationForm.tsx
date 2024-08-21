@@ -133,7 +133,7 @@ export default function RoomCreationForm() {
       <div className="flex w-full items-center justify-center">
         <button
           type="submit"
-          className="flex h-[3rem] items-center justify-center rounded-[1rem] bg-orange-600 px-[2rem] text-[1.3rem] font-bold text-white"
+          className="flex h-[3rem] w-[14rem] items-center justify-center rounded-[1rem] bg-orange-600 px-[2rem] text-[1.3rem] font-bold text-white"
         >
           {isLoading ? <LoadingSpinner width="2rem" height="2rem" color="white" /> : "Create Room"}
         </button>

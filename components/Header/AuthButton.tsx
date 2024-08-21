@@ -1,16 +1,25 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardDropdown from "./DashboardDropdown";
 import { AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 interface Props {
   isUserAuth: boolean;
+  isUserAdmin: boolean;
 }
 
-export default function AuthButton({ isUserAuth }: Props) {
+export default function AuthButton({ isUserAuth, isUserAdmin }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isDropdownOpen, setDropdown] = useState(false);
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      setDropdown(false);
+    }
+  }, [pathname]);
 
   function onButtonClick() {
     if (isUserAuth) {
@@ -28,7 +37,9 @@ export default function AuthButton({ isUserAuth }: Props) {
       >
         {isUserAuth ? "Dashboard" : "Sign In"}
       </button>
-      <AnimatePresence>{isDropdownOpen && isUserAuth && <DashboardDropdown />}</AnimatePresence>
+      <AnimatePresence>
+        {isDropdownOpen && isUserAuth && <DashboardDropdown isUserAdmin={isUserAdmin} />}
+      </AnimatePresence>
     </div>
   );
 }

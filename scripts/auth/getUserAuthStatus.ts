@@ -3,10 +3,6 @@
 export async function getUserAuthStatus(token: string) {
   const url = process.env.API_ADDR;
 
-  if (!token) {
-    return false;
-  }
-
   try {
     const res = await fetch(`${url}/v1/User/GetCurrentUser`, {
       method: "GET",
@@ -17,9 +13,16 @@ export async function getUserAuthStatus(token: string) {
       },
     });
 
-    return res.ok ? true : false;
+    let data: AuthorizedUser | undefined;
+
+    if (res.ok) {
+      data = (await res.json()) as AuthorizedUser;
+      return { data, isAuth: true };
+    } else {
+      return { data: undefined, isAuth: false };
+    }
   } catch (error) {
     console.error(error);
-    return false;
+    return { data: undefined, isAuth: false };
   }
 }

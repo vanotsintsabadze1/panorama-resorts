@@ -18,6 +18,13 @@ interface Room {
   images: RoomImagePayload[];
 }
 
+interface AuthorizedUser {
+  id: string;
+  email: string;
+  emailConfirmed: boolean;
+  roles: string[];
+}
+
 interface ReservationResponse {
   approveLink: string;
   reservationIdentifier: string;
@@ -37,4 +44,11 @@ interface ConfirmedReservationResponse {
     id: string;
     images: string[];
   };
+}
+
+interface RoomReview {
+  id: string;
+  starCount: number;
+  text: string;
+  createdAtUtc: Date;
 }
