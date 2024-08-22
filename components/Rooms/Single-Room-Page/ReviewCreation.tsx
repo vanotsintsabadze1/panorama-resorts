@@ -1,6 +1,4 @@
 "use client";
-
-import { Star } from "lucide-react";
 import { useState } from "react";
 import { schema } from "@/schemas/reviewSchema";
 import { submitReview } from "@/scripts/rooms/submitReview";

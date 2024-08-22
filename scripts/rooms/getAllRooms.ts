@@ -10,7 +10,7 @@ export async function getAllRooms() {
         "Content-Type": "application/json",
         accept: "application/json",
       },
-      cache: "no-cache",
+      cache: "no-store",
     });
 
     if (res.ok) {

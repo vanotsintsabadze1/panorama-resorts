@@ -49,15 +49,17 @@ export default function RoomsActions({ id }: Props) {
         )}
       </AnimatePresence>
 
-      <button onClick={onRoomEdit}>
-        <Edit size={17} color="green" className="duration-150 ease-in-out hover:scale-105" />
-      </button>
       {isLoading ? (
         <LoadingSpinner width="1.5rem" height="1.5rem" color="red" />
       ) : (
-        <button onClick={enableConfirmationModal}>
-          <Trash2Icon size={17} color="red" className="duration-150 ease-in-out hover:scale-105" />
-        </button>
+        <>
+          <button onClick={onRoomEdit}>
+            <Edit size={17} color="green" className="duration-150 ease-in-out hover:scale-105" />
+          </button>
+          <button onClick={enableConfirmationModal}>
+            <Trash2Icon size={17} color="red" className="duration-150 ease-in-out hover:scale-105" />
+          </button>
+        </>
       )}
     </>
   );

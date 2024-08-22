@@ -17,11 +17,6 @@ export default function Navigation() {
       href: "/admin/rooms",
       icon: <LucideHotel size={23} />,
     },
-    {
-      title: "Reservations",
-      href: "/admin/reservations",
-      icon: <BookmarkIcon size={23} />,
-    },
   ];
 
   return (
