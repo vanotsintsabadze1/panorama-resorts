@@ -3,10 +3,11 @@ import ReviewActions from "./ReviewActions";
 
 interface Props {
   roomId: string;
+  userId: string | undefined;
   review: RoomReview;
 }
 
-export default async function ReviewContainer({ review, roomId }: Props) {
+export default async function ReviewContainer({ userId, review, roomId }: Props) {
   return (
     <div className="flex w-full flex-col gap-[1rem]">
       <div className="flex w-full items-center gap-[2rem] px-[.5rem]">
@@ -19,7 +20,7 @@ export default async function ReviewContainer({ review, roomId }: Props) {
       </div>
       <div className="relative min-h-[10rem] w-full rounded-md bg-white px-[1rem] py-[1rem] shadow-md">
         <p className="font-medium] w-[90%] text-[1.3rem]">{review.text}</p>
-        <ReviewActions roomId={roomId} reviewId={review.id} reviewText={review.text} />
+        {userId === review.user.id && <ReviewActions roomId={roomId} reviewId={review.id} reviewText={review.text} />}
       </div>
     </div>
   );

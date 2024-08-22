@@ -4,6 +4,7 @@ import RoomReservationContainer from "@/components/Rooms/Single-Room-Page/RoomRe
 import SingleRoomCard from "@/components/Rooms/Single-Room-Page/SingleRoomCard";
 import ReviewsWrapper from "@/components/Rooms/Single-Room-Page/ReviewsWrapper";
 import { getUserToken } from "@/scripts/auth/getUserToken";
+import { getUserAuthStatus } from "@/scripts/auth/getUserAuthStatus";
 
 interface Props {
   params: {
@@ -87,6 +88,8 @@ export default async function page({ params: { id } }: Props) {
   const data: Room | null = await getRoom(url as string, token as string, id);
   const canReview = await isUserPermittedToReview(url as string, token as string, id);
   const reviews = await getRoomReviews(url as string, token as string, id);
+  const userAuth = await getUserAuthStatus(token as string);
+  const userId = userAuth?.data?.id;
 
   if (!data) {
     return (
@@ -102,7 +105,7 @@ export default async function page({ params: { id } }: Props) {
     <section className="flex w-full flex-col items-center justify-center py-[4rem]">
       <SingleRoomCard {...data} />;
       <RoomReservationContainer {...data} />
-      <ReviewsWrapper roomId={id} reviews={reviews} canReview={canReview} />
+      <ReviewsWrapper userId={userId} roomId={id} reviews={reviews} canReview={canReview} />
     </section>
   );
 }

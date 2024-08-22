@@ -51,4 +51,10 @@ interface RoomReview {
   starCount: number;
   text: string;
   createdAtUtc: Date;
+  user: {
+    id: string;
+    email: string;
+    emailConfiremd: boolean;
+    roles: string[] | null;
+  };
 }

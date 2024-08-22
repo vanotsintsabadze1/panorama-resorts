@@ -6,7 +6,12 @@ import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-export default function BurgerMenu() {
+interface Props {
+  isUserLoggedIn: boolean;
+  isUserAdmin: boolean;
+}
+
+export default function BurgerMenu({ isUserLoggedIn, isUserAdmin }: Props) {
   const [isSideBarOpen, setSideBar] = useState(false);
   const pathname = usePathname();
 
@@ -26,7 +31,13 @@ export default function BurgerMenu() {
         </button>
       </div>
       <AnimatePresence>
-        {isSideBarOpen && <Sidebar isSideBarOpen={isSideBarOpen} setModal={setSideBar} />}
+        {isSideBarOpen && (
+          <Sidebar
+            setModal={setSideBar}
+            isUserAdmin={isUserAdmin}
+            isUserLoggedIn={isUserLoggedIn}
+          />
+        )}
       </AnimatePresence>
     </>
   );
