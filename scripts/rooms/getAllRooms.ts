@@ -10,7 +10,7 @@ export async function getAllRooms() {
         "Content-Type": "application/json",
         accept: "application/json",
       },
-      cache: "no-store",
+      cache: "no-cache",
     });
 
     if (res.ok) {
@@ -19,10 +19,10 @@ export async function getAllRooms() {
     }
 
     if (!res.ok) {
-      return [];
+      return null;
     }
   } catch (err) {
     console.error(err);
-    return [];
+    return null;
   }
 }

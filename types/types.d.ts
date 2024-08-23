@@ -9,6 +9,8 @@ interface RoomImagePayload {
 }
 
 interface Room {
+  residents: number;
+  price: number;
   id: string;
   type: number;
   description: string;

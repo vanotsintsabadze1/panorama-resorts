@@ -4,7 +4,7 @@ import { getUserToken } from "@/scripts/auth/getUserToken";
 import { getAllRooms } from "@/scripts/rooms/getAllRooms";
 
 export default async function page() {
-  const rooms: Room[] = await getAllRooms();
+  const rooms: Room[] | null = await getAllRooms();
   const url = process.env.API_ADDR;
   const token = await getUserToken();
 

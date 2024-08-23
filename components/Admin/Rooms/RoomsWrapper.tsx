@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import RoomsActions from "./RoomActions";
 
 interface Props {
-  rooms: Room[] | [];
+  rooms: Room[] | null;
 }
 
 export default function RoomsWrapper({ rooms }: Props) {
@@ -15,6 +15,10 @@ export default function RoomsWrapper({ rooms }: Props) {
   const router = useRouter();
 
   useEffect(() => {
+    if (!rooms || !searchableRooms) {
+      return;
+    }
+
     if (search === "" && searchableRooms.length === rooms.length) {
       return;
     }
@@ -59,23 +63,24 @@ export default function RoomsWrapper({ rooms }: Props) {
           <div className="col-span-1 flex items-center justify-center px-[1rem]">Price Per Night</div>
           <div className="col-span-1 flex items-center justify-center px-[1rem]">Actions</div>
         </div>
-        {searchableRooms.map((room) => (
-          <div
-            key={room.id}
-            className="mt-[2rem] grid w-full grid-cols-5 gap-[1rem] rounded-[1rem] border border-gray-300 py-[1rem] shadow-sm"
-          >
-            <div className="col-span-1 flex w-[10rem] items-center truncate px-[1rem]">{room.id}</div>
-            <div className="col-span-1 flex items-center justify-center px-[1rem]">
-              {room.type === 0 ? "Single Room" : room.type === 1 ? "Double Room" : "Suite Room"}
+        {searchableRooms &&
+          searchableRooms.map((room) => (
+            <div
+              key={room.id}
+              className="mt-[2rem] grid w-full grid-cols-5 gap-[1rem] rounded-[1rem] border border-gray-300 py-[1rem] shadow-sm"
+            >
+              <div className="col-span-1 flex w-[10rem] items-center truncate px-[1rem]">{room.id}</div>
+              <div className="col-span-1 flex items-center justify-center px-[1rem]">
+                {room.type === 0 ? "Single Room" : room.type === 1 ? "Double Room" : "Suite Room"}
+              </div>
+              <div className="col-span-1 flex items-center justify-center px-[1rem]">{room.capacity}</div>
+              <div className="col-span-1 flex items-center justify-center px-[1rem]">{room.pricePerNight}</div>
+              <div className="col-span-1 flex items-center justify-center gap-[1rem] px-[1rem]">
+                <RoomsActions id={room.id} />
+              </div>
             </div>
-            <div className="col-span-1 flex items-center justify-center px-[1rem]">{room.capacity}</div>
-            <div className="col-span-1 flex items-center justify-center px-[1rem]">{room.pricePerNight}</div>
-            <div className="col-span-1 flex items-center justify-center gap-[1rem] px-[1rem]">
-              <RoomsActions id={room.id} />
-            </div>
-          </div>
-        ))}
-        {searchableRooms.length === 0 && (
+          ))}
+        {searchableRooms && searchableRooms.length === 0 && (
           <div className="flex h-full w-full items-center justify-center">
             <p className="text-[1.4rem] font-light uppercase tracking-wider text-gray-300">No Rooms Available</p>
           </div>
