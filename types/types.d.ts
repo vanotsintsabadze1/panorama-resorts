@@ -42,7 +42,7 @@ interface ConfirmedReservationResponse {
   };
   room: {
     id: string;
-    images: string[];
+    images: RoomImagePayload[];
   };
 }
 

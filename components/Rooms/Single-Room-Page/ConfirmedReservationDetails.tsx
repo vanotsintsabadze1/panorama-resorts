@@ -1,7 +1,10 @@
 import { format } from "date-fns";
 import { CheckCircle2 } from "lucide-react";
-
 import Image from "next/image";
+
+interface Props extends ConfirmedReservationResponse {
+  image: string;
+}
 
 export default function ConfirmedReservationDetails({
   checkInDateUtc,
@@ -9,14 +12,15 @@ export default function ConfirmedReservationDetails({
   numberOfGuests,
   identifier,
   user,
-}: ConfirmedReservationResponse) {
+  image,
+}: Props) {
   const formattedCheckInDate = format(new Date(checkInDateUtc), "dd/MM/yyyy");
   const formattedCheckOutDate = format(new Date(checkOutDateUtc), "dd/MM/yyyy");
 
   return (
     <div className="flex w-[40rem] flex-col items-center p-[1rem] md:w-[60rem] xs:w-[30rem]">
       <div className="relative h-[25rem] w-[38rem] md:h-[30rem] md:w-[45rem] xs:h-[20rem] xs:w-[30rem]">
-        <Image src="https://placehold.co/600x400/png" fill alt="image" className="rounded-[2rem]" />
+        <Image src={image} fill alt="room-image" className="rounded-[2rem]" />
       </div>
       <div className="mt-[2rem] flex w-[38rem] flex-col gap-[1rem] md:w-[45rem] xs:w-[30rem]">
         <div className="flex w-full flex-col items-center justify-center gap-[1rem]">
