@@ -1,6 +1,6 @@
 "use client";
 
-import { PersonStanding, CircleDollarSign } from "lucide-react";
+import { PersonStanding, CircleDollarSign, Star } from "lucide-react";
 import Image from "next/image";
 import RoomSeeMoreBtn from "./RoomSeeMoreBtn";
 import { useEffect, useState } from "react";
@@ -21,6 +21,7 @@ export default function RoomCard({
   pricePerNight,
   url,
   token,
+  averageStars,
 }: Props) {
   const [image, setImages] = useState<string>("");
 
@@ -59,10 +60,7 @@ export default function RoomCard({
         <h2 className="text-[1.8rem] font-bold">
           {type === 0 ? "Single Room" : type === 1 ? "Double Room" : "Suite Room"}
         </h2>
-        <p className="line-clamp-3 text-[1.3rem] font-medium">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur mollitia deserunt laudantium velit facilis
-          ducimus molestias nam sapiente architecto distinctio.
-        </p>
+        <p className="line-clamp-3 text-[1.3rem] font-medium">{description}</p>
         <p className="mt-[.5rem] text-[1.3rem] font-bold">Details</p>
         <div className="my-[.5rem] flex w-full items-center gap-[2rem]">
           <div className="flex items-center justify-center gap-[.5rem]">
@@ -74,7 +72,14 @@ export default function RoomCard({
             <p className="text-[1.4rem] font-medium">${pricePerNight}</p>
           </div>
         </div>
-        <div className="flex w-full items-center justify-center">
+        <div className="flex items-center gap-[.5rem]">
+          {[
+            ...Array(5)
+              .fill(0)
+              .map((_, i) => <Star key={i} size={25} fill={i <= averageStars ? "black" : "none"} />),
+          ]}
+        </div>
+        <div className="mt-[2rem] flex w-full items-center justify-center">
           <RoomSeeMoreBtn id={id} />
         </div>
       </div>

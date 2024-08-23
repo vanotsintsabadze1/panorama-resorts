@@ -16,7 +16,7 @@ export default function ReservationConfirmation({ url, token: authToken }: Props
   const [token, setToken] = useState<string | null>(null);
   const [data, setData] = useState<ConfirmedReservationResponse | undefined>(undefined);
   const [fetched, setFetched] = useState(false);
-  const [images, setImages] = useState<string[]>([]);
+  const [image, setImage] = useState<string>("");
 
   async function confirmReservationOnLoad() {
     if (!token) {
@@ -50,25 +50,32 @@ export default function ReservationConfirmation({ url, token: authToken }: Props
     }
   }, [token]);
 
-  // Has to be handled on backend first since images property that's being sent is NULL.
-  // To be fixed ltr.
-  // useEffect(() => {
-  //   if (data) {
-  //     data.room.images.forEach(async (image) => {
-  //       const res = await fetch(`${url}/v1/Image/${image}`, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "image/.jpg",
-  //           Authorization: `Bearer ${authToken}`,
-  //         },
-  //       });
-  //     });
-  //   }
-  // }, [data]);
+  async function imageGetter(data: ConfirmedReservationResponse) {
+    const firstImage = data.room.images[0].url;
+
+    const res = await fetch(`${url}/v1/Image/${firstImage}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "image/.jpeg",
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    const blob = await res.blob();
+    const imageURL = URL.createObjectURL(blob);
+
+    setImage(imageURL);
+  }
+
+  useEffect(() => {
+    if (data) {
+      imageGetter(data);
+    }
+  }, [data]);
 
   return fetched ? (
     <section className="flex w-full items-center justify-center px-[1rem] py-[4rem]">
-      {data && <ConfirmedReservationDetails {...data} />}
+      {data && <ConfirmedReservationDetails image={image} {...data} />}
       {!data && (
         <div className="flex flex-col items-center justify-center gap-[2rem] rounded-[2rem] bg-white px-[4rem] py-[3rem] xs:w-[30rem]">
           <XCircle size={150} fill="white" color="red" />

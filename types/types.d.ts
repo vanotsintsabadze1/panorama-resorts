@@ -15,6 +15,7 @@ interface Room {
   capacity: number;
   pricePerNight: number;
   pricePerNightCurrency: number;
+  averageStars: number;
   images: RoomImagePayload[];
 }
 
@@ -42,7 +43,7 @@ interface ConfirmedReservationResponse {
   };
   room: {
     id: string;
-    images: string[];
+    images: RoomImagePayload[];
   };
 }
 

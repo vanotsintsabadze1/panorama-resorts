@@ -20,10 +20,12 @@ export default function RoomsWrapper({ rooms, url, token }: Props) {
         {existingRooms.map((room, index) => (
           <RoomCard url={url as string} token={token as string} {...room} key={index} />
         ))}
-        {rooms.length === 0 && (
-          <p className="text-[1.4rem] font-light uppercase tracking-wider text-gray-300">No rooms found.</p>
-        )}
       </div>
+      {rooms.length === 0 && (
+        <div className="flex w-full items-center justify-center">
+          <p className="text-[1.4rem] font-light uppercase tracking-wider text-gray-300">No rooms found.</p>
+        </div>
+      )}
     </section>
   );
 }
