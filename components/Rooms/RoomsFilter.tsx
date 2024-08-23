@@ -1,8 +1,8 @@
 import { useState } from "react";
 import RoomFilterType from "./RoomFilterType";
+import toast from "react-hot-toast";
 import RoomFilterResidents from "./RoomFilterResidents";
 import RoomsFilterPriceRange from "./RoomsFilterPriceRange";
-import toast from "react-hot-toast";
 
 interface Props {
   setRooms: React.Dispatch<React.SetStateAction<Room[]>>;
@@ -13,7 +13,7 @@ export default function RoomsFilter({ setRooms }: Props) {
   const [residentAmount, setResidentAmount] = useState(0);
   const [priceFrom, setPriceFrom] = useState(0);
   const [priceTo, setPriceTo] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
   function onSubmit() {
     if (priceFrom > priceTo) {
@@ -26,6 +26,16 @@ export default function RoomsFilter({ setRooms }: Props) {
       return;
     }
 
+    if (priceTo === 0) {
+      toast.error("Please enter a price range.");
+      return;
+    }
+
+    if (residentAmount < 1) {
+      toast.error("Please enter a valid resident amount.");
+      return;
+    }
+
     setRooms((prev) =>
       prev.filter(
         (room) =>
@@ -35,6 +45,7 @@ export default function RoomsFilter({ setRooms }: Props) {
           room.type === type,
       ),
     );
+    setIsFilterActive(true);
   }
 
   return (
@@ -54,6 +65,13 @@ export default function RoomsFilter({ setRooms }: Props) {
           Submit
         </button>
       </div>
+      {isFilterActive && (
+        <div className="flex w-full items-center justify-center">
+          <button onClick={() => (window.location.href = "/rooms")} className="">
+            Clear Filter
+          </button>
+        </div>
+      )}
     </div>
   );
 }

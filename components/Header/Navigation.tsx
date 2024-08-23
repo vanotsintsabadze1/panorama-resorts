@@ -28,7 +28,7 @@ export default function Navigation({ className }: Props) {
   return (
     <nav className={className}>
       {links.map((link) => (
-        <Link key={link.url} href={link.url}>
+        <Link className="duration-300 hover:scale-110 hover:opacity-50" key={link.url} href={link.url}>
           {link.name}
         </Link>
       ))}

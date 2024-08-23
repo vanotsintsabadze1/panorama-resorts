@@ -15,6 +15,7 @@ interface Room {
   capacity: number;
   pricePerNight: number;
   pricePerNightCurrency: number;
+  averageStars: number;
   images: RoomImagePayload[];
 }
 
