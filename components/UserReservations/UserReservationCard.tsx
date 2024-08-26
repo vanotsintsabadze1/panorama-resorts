@@ -15,7 +15,8 @@ export default function UserReservationCard({ url, token, reservation }: Props) 
   const [image, setImage] = useState("");
 
   async function getImageAsURL() {
-    const res = await fetch(`${url}/v1/Image/${reservation.room.images[0]}`, {
+    const imageToBeFetched = reservation.room.images[0].url;
+    const res = await fetch(`${url}/v1/Image/${imageToBeFetched}`, {
       method: "GET",
       headers: {
         "Content-Type": "image/.jpeg",
