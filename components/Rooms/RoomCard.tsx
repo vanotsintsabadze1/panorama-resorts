@@ -39,6 +39,7 @@ export default function RoomCard({
     });
     const blob = await res.blob();
     const imageUrl = URL.createObjectURL(blob);
+    console.log(imageUrl);
     setImages(imageUrl);
   }
 

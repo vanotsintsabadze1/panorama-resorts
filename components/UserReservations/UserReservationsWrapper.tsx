@@ -1,10 +1,16 @@
+import { getUserToken } from "@/scripts/auth/getUserToken";
 import UserReservationCard from "./UserReservationCard";
 
 interface Props {
   userReservations: ConfirmedReservationResponse[] | null;
 }
 
-export default function UserReservationsWrapper({ userReservations }: Props) {
+export default async function asyncUserReservationsWrapper({ userReservations }: Props) {
+  const url = process.env.API_ADDR;
+  const token = await getUserToken();
+
+  console.log(userReservations);
+
   return (
     <>
       <div className="flex w-full flex-col items-center justify-center gap-[1rem] px-[2rem] py-[3rem]">
@@ -19,7 +25,12 @@ export default function UserReservationsWrapper({ userReservations }: Props) {
       <div className="flex w-full flex-col items-center gap-[3rem] px-[1rem]">
         {userReservations &&
           userReservations.map((reservation) => (
-            <UserReservationCard key={reservation.identifier} reservation={reservation} />
+            <UserReservationCard
+              url={url as string}
+              token={token as string}
+              key={reservation.identifier}
+              reservation={reservation}
+            />
           ))}
       </div>
       {userReservations && userReservations.length === 0 && (

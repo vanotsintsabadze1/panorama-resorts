@@ -1,10 +1,11 @@
 "use client";
 
 import { cancelAuthorizedReservation } from "@/scripts/rooms/cancelAuthorizedReservation";
-import { Trash, Trash2Icon } from "lucide-react";
-import toast from "react-hot-toast";
+import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import LoadingSpinner from "../misc/LoadingSpinner";
+import ConfirmationModal from "../misc/ConfirmationModal";
 
 interface Props {
   rid: string;
@@ -12,6 +13,7 @@ interface Props {
 
 export default function ReservationCancelBtn({ rid }: Props) {
   const [isLoading, setIsLoading] = useState(false);
+  const [shouldConfirmationModalOpen, setShouldConfirmationModalOpen] = useState(false);
 
   async function onCancellation() {
     setIsLoading(true);
@@ -25,17 +27,23 @@ export default function ReservationCancelBtn({ rid }: Props) {
   }
 
   return (
-    <button
-      onClick={onCancellation}
-      className="mt-[2rem] flex h-[3rem] w-[12rem] items-center justify-center gap-[.5rem] rounded-lg border-2 border-red-600 text-[1.2rem] font-medium text-red-600 shadow-sm"
-    >
-      {isLoading && <LoadingSpinner width="2rem" height="2rem" color="red" />}
-      {!isLoading && (
-        <>
-          <Trash2Icon size={17} color="red" />
-          <p>Cancel</p>
-        </>
+    <>
+      {shouldConfirmationModalOpen && (
+        <ConfirmationModal callback={() => onCancellation()} setModal={setShouldConfirmationModalOpen} />
       )}
-    </button>
+
+      <button
+        onClick={() => setShouldConfirmationModalOpen(true)}
+        className="mt-[2rem] flex h-[3rem] w-[12rem] items-center justify-center gap-[.5rem] rounded-lg border-2 border-red-600 text-[1.2rem] font-medium text-red-600 shadow-sm"
+      >
+        {isLoading && <LoadingSpinner width="2rem" height="2rem" color="red" />}
+        {!isLoading && (
+          <>
+            <Trash2Icon size={17} color="red" />
+            <p>Cancel</p>
+          </>
+        )}
+      </button>
+    </>
   );
 }
