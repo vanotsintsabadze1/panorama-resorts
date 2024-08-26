@@ -1,14 +1,17 @@
 "use server";
-import { startOfDay, format } from "date-fns";
 import { getUserToken } from "../auth/getUserToken";
+import { formatInTimeZone, toZonedTime } from "date-fns-tz";
 
 export async function reserveRoom(roomId: string, checkInDate: Date, checkOutDate: Date, residentAmount: number) {
   const url = process.env.API_ADDR;
-  const formattedCheckInDate = format(startOfDay(checkInDate), "yyyy-MM-dd'T'HH:mm:ss");
-  const formattedCheckOutDate = format(startOfDay(checkOutDate), "yyyy-MM-dd'T'HH:mm:ss");
+  const tz = "Asia/Tbilisi";
+
+  const formattedCheckInDate = formatInTimeZone(checkInDate, tz, "yyyy-MM-dd'T'00:00:00");
+  const formattedCheckOutDate = formatInTimeZone(checkOutDate, tz, "yyyy-MM-dd'T'00:00:00");
+
   const token = await getUserToken();
 
-  if (!roomId || !checkInDate || !checkOutDate || !residentAmount) {
+  if (!roomId || !checkInDate || !checkOutDate || !residentAmount || false) {
     return {
       status: 400,
       message: "Please fill all the fields",
