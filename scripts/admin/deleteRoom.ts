@@ -20,8 +20,6 @@ export async function deleteRoom(id: string) {
       },
     });
 
-    console.log(await res.json());
-
     return res.status === 200 ? { status: 200 } : { status: res.status };
   } catch (error) {
     console.error(error);

@@ -17,7 +17,6 @@ export async function editReview(starCount: number, text: string, roomId: string
       body: JSON.stringify({ starCount, text }),
     });
 
-    console.log("🚀 ~ editReview ~ res:", await res.json());
     return res.ok ? { status: 200 } : { status: res.status, message: res.statusText };
   } catch (error) {
     console.error(error);

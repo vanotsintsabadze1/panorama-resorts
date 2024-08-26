@@ -9,8 +9,6 @@ export default async function asyncUserReservationsWrapper({ userReservations }:
   const url = process.env.API_ADDR;
   const token = await getUserToken();
 
-  console.log(userReservations);
-
   return (
     <>
       <div className="flex w-full flex-col items-center justify-center gap-[1rem] px-[2rem] py-[3rem]">

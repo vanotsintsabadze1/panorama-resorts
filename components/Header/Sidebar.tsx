@@ -79,9 +79,11 @@ export default function Sidebar({ isUserAdmin, isUserLoggedIn, setModal }: Props
         )}
         <Navigation className="flex w-full flex-col items-end gap-[5rem] px-[1rem] pt-[3rem] text-[1.8rem] font-light text-white" />
         {isUserLoggedIn && (
-          <div className="mt-[5rem] flex w-full flex-col items-end justify-end gap-[5rem] px-[1rem]">
+          <div className="mt-[5rem] flex w-full flex-col items-end justify-end gap-[5rem] px-[1rem] text-[1.8rem] font-light text-white">
             {isUserAdmin && <Link href="/admin">Admin</Link>}
-            <button onClick={() => logoutUser()}>Log Out</button>
+            <button onClick={() => logoutUser()} className="whitespace-nowrap">
+              Log Out
+            </button>
           </div>
         )}
       </motion.div>
